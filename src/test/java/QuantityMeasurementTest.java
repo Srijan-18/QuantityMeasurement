@@ -3,6 +3,7 @@ import org.junit.Test;
 import quantitymeasurement.service.QuantityMeasurement;
 
 public class QuantityMeasurementTest {
+
     @Test
     public void givenValuesInFeet_ShouldReturnCorrectValueInInches() {
         QuantityMeasurement quantityMeasurement = new QuantityMeasurement();
