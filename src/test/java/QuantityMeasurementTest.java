@@ -29,4 +29,11 @@ public class QuantityMeasurementTest {
             Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
         }
     }
+
+    @Test
+    public void givenValuesInFeetAndOtherFormToCompare_ShouldReturnFalse() throws QuantityMeasurementException {
+        Feet feetValue = new Feet(25.0);
+        String checkVariable = "STR";
+        Assert.assertFalse(feetValue.equals(checkVariable));
+    }
 }
