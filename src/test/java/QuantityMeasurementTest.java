@@ -107,4 +107,12 @@ public class QuantityMeasurementTest {
         Assert.assertEquals(new QuantityMeasurement()
                 .doConversion(inch.value , ConversionType.INCH_TO_YARD), yard.value , 0.0001);
     }
+
+    @Test
+    public void given1YdAnd3Feet_ShouldReturnTrue() throws QuantityMeasurementException {
+        Yard yard = new Yard(1);
+        Feet feet = new Feet(3.0);
+        Assert.assertEquals(new QuantityMeasurement()
+                .doConversion(yard.value , ConversionType.YARD_TO_FEET), feet.value , 0.0001);
+    }
 }
