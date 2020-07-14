@@ -66,4 +66,11 @@ public class QuantityMeasurementTest {
             Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
         }
     }
+
+    @Test
+    public void givenDifferentValuesInInchToCompare_ShouldReturnFalse() throws QuantityMeasurementException {
+        Inch inchValue1 = new Inch(4.0);
+        Inch inchValue2 = new Inch(6.0);
+        Assert.assertFalse(inchValue1.equals(inchValue2));
+    }
 }
