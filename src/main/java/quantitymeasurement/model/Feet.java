@@ -10,14 +10,26 @@ public class Feet {
             this.value = value;
         } catch (NullPointerException e) {
             throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.NULL_VALUE,
-                                                    " NUll Value");
+                                                    "Null Value");
         }
+    }
+
+    public boolean checkReference(Object checkObject) throws QuantityMeasurementException {
+        if (this != checkObject)
+            throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.DIFFERENT_REFERENCE,
+                                                    "Reference Not Same");
+        return true;
+    }
+
+    public boolean checkType( Object checkObject) throws QuantityMeasurementException {
+        if (checkObject.getClass() != getClass())
+         throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.TYPE_MISMATCH,
+                                                "TYPE NOT SAME");
+        return true;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return false;
-        if (!(o instanceof Feet)) return false;
         Feet feet = (Feet) o;
         return Double.compare(feet.value, value) == 0;
     }
