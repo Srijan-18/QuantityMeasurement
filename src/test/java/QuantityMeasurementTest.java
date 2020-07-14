@@ -3,7 +3,9 @@ import org.junit.Test;
 import quantitymeasurement.exception.QuantityMeasurementException;
 import quantitymeasurement.model.Feet;
 import quantitymeasurement.model.Inch;
+import quantitymeasurement.model.Yard;
 import quantitymeasurement.service.QuantityMeasurement;
+import quantitymeasurement.utility.ConversionType;
 
 public class QuantityMeasurementTest {
 
@@ -72,5 +74,13 @@ public class QuantityMeasurementTest {
         Inch inchValue1 = new Inch(4.0);
         Inch inchValue2 = new Inch(6.0);
         Assert.assertFalse(inchValue1.equals(inchValue2));
+    }
+
+    @Test
+    public void given3YardAnd3Feet_ShouldReturnFalse() throws QuantityMeasurementException {
+        Feet feet = new Feet(3.0);
+        Yard yard = new Yard(1.0);
+       Assert.assertTrue(new QuantityMeasurement()
+                        .checkConversion(yard.value, feet.value, ConversionType.FEET_TO_YARD));
     }
 }
