@@ -57,4 +57,13 @@ public class QuantityMeasurementTest {
         Feet feetValue = new Feet(2.0);
         Assert.assertFalse(inchValue.equals(feetValue));
     }
+
+    @Test
+    public void givenInchWithValueNull_ShouldThroeCustomException() {
+        try {
+            Inch inch = new Inch(null);
+        } catch (QuantityMeasurementException e) {
+            Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
+        }
+    }
 }
