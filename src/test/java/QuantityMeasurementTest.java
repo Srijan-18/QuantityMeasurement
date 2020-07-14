@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import quantitymeasurement.exception.QuantityMeasurementException;
 import quantitymeasurement.model.Feet;
+import quantitymeasurement.model.Inch;
 import quantitymeasurement.service.QuantityMeasurement;
 
 public class QuantityMeasurementTest {
@@ -43,4 +44,11 @@ public class QuantityMeasurementTest {
         Feet feetValue2 = new Feet(36.0);
         Assert.assertFalse(feetValue1.equals(feetValue2));
     }
+    @Test
+    public void given0InchAnd0Inch_ShouldReturnTrue() throws QuantityMeasurementException {
+        Inch inchValue1 = new Inch(0.0);
+        Inch inchValue2 = new Inch(0.0);
+        Assert.assertTrue(inchValue1.equals(inchValue2));
+    }
+
 }
