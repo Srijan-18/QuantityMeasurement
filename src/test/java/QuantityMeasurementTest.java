@@ -36,4 +36,11 @@ public class QuantityMeasurementTest {
         String checkVariable = "STR";
         Assert.assertFalse(feetValue.equals(checkVariable));
     }
+
+    @Test
+    public void givenDifferentValuesInSameFromToCompare_ShouldReturnFalse() throws QuantityMeasurementException {
+        Feet feetValue1 = new Feet(24.0);
+        Feet feetValue2 = new Feet(36.0);
+        Assert.assertFalse(feetValue1.equals(feetValue2));
+    }
 }
