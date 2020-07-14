@@ -20,4 +20,13 @@ public class QuantityMeasurementTest {
         Feet feetValue2 = new Feet(0.0);
         Assert.assertTrue(feetValue1.equals(feetValue2));
     }
+
+    @Test
+    public void givenNullFeetValue_ShouldThrowAnException() {
+        try {
+            Feet feetValue = new Feet(null);
+        } catch (QuantityMeasurementException e) {
+            Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
+        }
+    }
 }
