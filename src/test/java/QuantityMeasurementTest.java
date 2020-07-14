@@ -51,4 +51,10 @@ public class QuantityMeasurementTest {
         Assert.assertTrue(inchValue1.equals(inchValue2));
     }
 
+    @Test
+    public void givenInchAndOtherFormToCompare_ShouldReturnFalse() throws QuantityMeasurementException {
+        Inch inchValue = new Inch(2.0);
+        Feet feetValue = new Feet(2.0);
+        Assert.assertFalse(inchValue.equals(feetValue));
+    }
 }
