@@ -77,7 +77,7 @@ public class QuantityMeasurementTest {
     }
 
     @Test
-    public void given3YardAnd3Feet_ShouldReturnFalse() throws QuantityMeasurementException {
+    public void given1YardAnd3Feet_ShouldReturnTrue() throws QuantityMeasurementException {
         Feet feet = new Feet(3.0);
         Yard yard = new Yard(1.0);
        Assert.assertTrue(new QuantityMeasurement()
