@@ -89,6 +89,14 @@ public class QuantityMeasurementTest {
         Feet feet = new Feet(1.0);
         Yard yard = new Yard(1.0);
         Assert.assertFalse(new QuantityMeasurement()
-                .checkConversion(yard.value, feet.value, ConversionType.FEET_TO_YARD));
+                            .checkConversion(yard.value, feet.value, ConversionType.FEET_TO_YARD));
+    }
+
+    @Test
+    public void given1InchAnd1Yard_ShouldReturnFalse() throws QuantityMeasurementException {
+        Inch inch = new Inch(1.0);
+        Yard yard = new Yard(1.0);
+        Assert.assertFalse(new QuantityMeasurement()
+                            .checkConversion(yard.value , inch.value , ConversionType.INCH_TO_YARD));
     }
 }
