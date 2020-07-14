@@ -10,14 +10,6 @@ import quantitymeasurement.utility.ConversionType;
 public class QuantityMeasurementTest {
 
     @Test
-    public void givenValuesInFeet_ShouldReturnCorrectValueInInches() {
-        QuantityMeasurement quantityMeasurement = new QuantityMeasurement();
-        double feet = 1.99;
-        double inches = quantityMeasurement.convert(feet);
-        Assert.assertEquals(22.8, inches, 0.001);
-    }
-
-    @Test
     public void given0FeetAnd0Feet_ShouldReturnTrue() throws QuantityMeasurementException {
         Feet feetValue1 = new Feet(0.0);
         Feet feetValue2 = new Feet(0.0);
@@ -80,31 +72,39 @@ public class QuantityMeasurementTest {
     public void given1YardAnd3Feet_ShouldReturnTrue() throws QuantityMeasurementException {
         Feet feet = new Feet(3.0);
         Yard yard = new Yard(1.0);
-       Assert.assertTrue(new QuantityMeasurement()
-                        .checkConversion(yard.value, feet.value, ConversionType.FEET_TO_YARD));
+       Assert.assertEquals(new QuantityMeasurement()
+                        .doConversion(feet.value, ConversionType.FEET_TO_YARD), yard.value , 0.0001);
     }
 
     @Test
     public void given1YardAnd1Feet_ShouldReturnFalse() throws QuantityMeasurementException {
         Feet feet = new Feet(1.0);
         Yard yard = new Yard(1.0);
-        Assert.assertFalse(new QuantityMeasurement()
-                            .checkConversion(yard.value, feet.value, ConversionType.FEET_TO_YARD));
+        Assert.assertNotEquals(new QuantityMeasurement()
+                            .doConversion(yard.value, ConversionType.FEET_TO_YARD), feet.value , 0.0001);
     }
 
     @Test
     public void given1InchAnd1Yard_ShouldReturnFalse() throws QuantityMeasurementException {
         Inch inch = new Inch(1.0);
         Yard yard = new Yard(1.0);
-        Assert.assertFalse(new QuantityMeasurement()
-                            .checkConversion(yard.value , inch.value , ConversionType.INCH_TO_YARD));
+        Assert.assertNotEquals(new QuantityMeasurement()
+                            .doConversion(inch.value , ConversionType.INCH_TO_YARD), yard.value, 0.0001);
     }
 
     @Test
-    public void given1YardAnd1Inch_ShouldReturnTrue() throws QuantityMeasurementException {
+    public void given1YardAnd36Inch_ShouldReturnTrue() throws QuantityMeasurementException {
         Inch inch = new Inch(36.0);
         Yard yard = new Yard(1.0);
-        Assert.assertFalse(new QuantityMeasurement()
-                .checkConversion(inch.value , yard.value , ConversionType.INCH_TO_YARD));
+        Assert.assertEquals(new QuantityMeasurement()
+                .doConversion(yard.value , ConversionType.YARD_TO_INCH), inch.value , 0.0001);
+    }
+
+    @Test
+    public void given36InchANd1Yard_ShouldReturnTrue() throws QuantityMeasurementException {
+        Inch inch = new Inch(36.0);
+        Yard yard = new Yard(1.0);
+        Assert.assertEquals(new QuantityMeasurement()
+                .doConversion(inch.value , ConversionType.INCH_TO_YARD), yard.value , 0.0001);
     }
 }
