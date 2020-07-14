@@ -9,13 +9,14 @@ public class Feet {
         try {
             this.value = value;
         } catch (NullPointerException e) {
-            throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.NULL_VALUE, " NUll Value");
+            throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.NULL_VALUE,
+                                                    " NUll Value");
         }
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) return false;
         if (!(o instanceof Feet)) return false;
         Feet feet = (Feet) o;
         return Double.compare(feet.value, value) == 0;
