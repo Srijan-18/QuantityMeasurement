@@ -168,4 +168,12 @@ public class QuantityMeasurementTest {
             Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
         }
     }
+
+    @Test
+    public void given2InchAnd2Inch_WhenAdded_ShouldReturn4Inch() {
+        Length inch1 = new Length(2.0 , Length.LengthType.INCH);
+        Length inch2 = new Length(2.0 , Length.LengthType.INCH);
+        double result = quantityMeasurement.addValues(inch1, inch2);
+        Assert.assertEquals(result, 4.0, 0.0001);
+    }
 }
