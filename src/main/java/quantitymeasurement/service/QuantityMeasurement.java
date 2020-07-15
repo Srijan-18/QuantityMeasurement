@@ -1,16 +1,15 @@
 package quantitymeasurement.service;
 
-import quantitymeasurement.utility.ConversionType;
+import quantitymeasurement.model.Length;
 
 public class QuantityMeasurement {
     /**
      * TASK : To convert one type to another.
      * @param value
-     * @param conversionType
+     * @param lengthType
      * @return
      */
-    public double doConversion(double value, ConversionType conversionType) {
-        return value*conversionType.value;
+    public double convertToCommonBase(double value, Length.LengthType lengthType) {
+        return value* lengthType.conversionToBaseFactor;
     }
-
 }
