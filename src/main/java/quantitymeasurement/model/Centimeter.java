@@ -6,7 +6,7 @@ public class Centimeter {
 
     public double value;
 
-    public Centimeter(double value) {
+    public Centimeter(Double value) {
         try {
             this.value = value;
         } catch (NullPointerException e) {
