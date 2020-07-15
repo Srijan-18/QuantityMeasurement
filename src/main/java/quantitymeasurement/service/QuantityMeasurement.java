@@ -12,4 +12,5 @@ public class QuantityMeasurement {
     public double doConversion(double value, ConversionType conversionType) {
         return value*conversionType.value;
     }
+
 }

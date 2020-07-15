@@ -21,7 +21,7 @@ public class Feet {
         return true;
     }
 
-    public boolean checkType( Object checkObject) throws QuantityMeasurementException {
+    public boolean checkType(Object checkObject) throws QuantityMeasurementException {
         if (checkObject.getClass() != getClass())
          throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.TYPE_MISMATCH,
                                                 "TYPE NOT SAME");
