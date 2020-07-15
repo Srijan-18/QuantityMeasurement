@@ -1,179 +1,169 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import quantitymeasurement.exception.QuantityMeasurementException;
-import quantitymeasurement.model.Centimeter;
-import quantitymeasurement.model.Feet;
-import quantitymeasurement.model.Inch;
-import quantitymeasurement.model.Yard;
+import quantitymeasurement.model.Length;
 import quantitymeasurement.service.QuantityMeasurement;
-import quantitymeasurement.utility.ConversionType;
 
 public class QuantityMeasurementTest {
 
+    private  QuantityMeasurement quantityMeasurement;
+
+    @Before
+    public void setUp(){
+        quantityMeasurement = new QuantityMeasurement();
+    }
+
     @Test
-    public void given0FeetAnd0Feet_ShouldReturnTrue() throws QuantityMeasurementException {
-        Feet feetValue1 = new Feet(0.0);
-        Feet feetValue2 = new Feet(0.0);
-        feetValue1.checkType(feetValue2);
+    public void given0FeetAnd0Feet_WhenCompared_ShouldReturnTrue() throws QuantityMeasurementException {
+        Length feetValue1 = new Length(0.0, Length.LengthType.FEET);
+        Length feetValue2 = new Length(0.0, Length.LengthType.FEET);
         Assert.assertTrue(feetValue1.equals(feetValue2));
     }
 
-
     @Test
-    public void givenFeetValueAndCheckedForWrongReference_ShouldReturnFalse() {
-        try {
-            Feet feetValue = new Feet(0.0);
-            Feet feetValue1 = new Feet(0.0);
-            feetValue.checkReference(feetValue1);
-        } catch (QuantityMeasurementException e) {
-            Assert.assertEquals(QuantityMeasurementException.ExceptionType.DIFFERENT_REFERENCE, e.type);
-        }
+    public void givenFeetValue_WhenCheckedForCorrectReference_ShouldReturnTrue() throws QuantityMeasurementException {
+        Length feetValue1 = new Length(0.0, Length.LengthType.FEET);
+        Assert.assertTrue(feetValue1.equals(feetValue1));
     }
 
     @Test
-    public void givenFeetValueAndCheckedForCorrectReference_ShouldReturnTrue() throws QuantityMeasurementException {
-        Feet feetValue1 = new Feet(0.0);
-        Assert.assertTrue(feetValue1.checkReference(feetValue1));
-    }
-
-    @Test
-    public void givenNullFeetValue_ShouldThrowAnException() {
+    public void givenFeetValue_WhenNull_ShouldThrowAnException() {
         try {
-            new Feet(null);
+            new Length(null, Length.LengthType.FEET );
         } catch (QuantityMeasurementException e) {
             Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
         }
     }
 
     @Test
-    public void givenValuesInFeetAndOtherFormToCompare_ShouldReturnFalse() throws QuantityMeasurementException {
-        Feet feetValue = new Feet(25.0);
+    public void givenValuesInFeetAndOtherFormWhenCompared_ShouldReturnFalse() throws QuantityMeasurementException {
+        Length feetValue = new Length(25.0, Length.LengthType.FEET);
         String checkVariable = "STR";
-        try {
-            feetValue.checkType(checkVariable);
-        } catch (QuantityMeasurementException e) {
-            Assert.assertEquals(QuantityMeasurementException.ExceptionType.TYPE_MISMATCH , e.type);
-        }
+        Assert.assertFalse(feetValue.equals(checkVariable));
     }
 
     @Test
-    public void givenDifferentValuesInSameFromToCompare_ShouldReturnFalse() throws QuantityMeasurementException {
-        Feet feetValue1 = new Feet(24.0);
-        Feet feetValue2 = new Feet(36.0);
+    public void givenDifferentValuesInSameFrom_WhenCompared_ShouldReturnFalse() throws QuantityMeasurementException {
+        Length feetValue1 = new Length(24.0, Length.LengthType.FEET );
+        Length feetValue2 = new Length(36.0, Length.LengthType.FEET);
         Assert.assertFalse(feetValue1.equals(feetValue2));
     }
     @Test
     public void given0InchAnd0Inch_ShouldReturnTrue() throws QuantityMeasurementException {
-        Inch inchValue1 = new Inch(0.0);
-        Inch inchValue2 = new Inch(0.0);
-        inchValue1.checkType(inchValue2);
+        Length inchValue1 = new Length(0.0, Length.LengthType.INCH);
+        Length inchValue2 = new Length(0.0, Length.LengthType.INCH);
         Assert.assertTrue(inchValue1.equals(inchValue2));
     }
 
     @Test
-    public void givenInchAndOtherFormToCompare_ShouldThrowCustomException() throws QuantityMeasurementException {
-        Inch inchValue = new Inch(2.0);
-        Feet feetValue = new Feet(2.0);
-        try {
-            Assert.assertFalse(inchValue.checkType(feetValue));
-        } catch (QuantityMeasurementException e) {
-            Assert.assertEquals(QuantityMeasurementException.ExceptionType.TYPE_MISMATCH , e.type);
-        }
+    public void givenInchAndOtherForm_WhenCompared_ShouldThrowCustomException() throws QuantityMeasurementException {
+        Length inchValue = new Length(2.0 , Length.LengthType.INCH);
+        Length lengthValue = new Length(2.0, Length.LengthType.FEET);
+            Assert.assertFalse(inchValue.equals(lengthValue));
     }
 
     @Test
-    public void givenInchWithValueNull_ShouldThrowCustomException() {
+    public void givenInchValue_WhenNull_ShouldThrowCustomException() {
         try {
-            Inch inch = new Inch(null);
+            new Length(null, Length.LengthType.INCH);
         } catch (QuantityMeasurementException e) {
             Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
         }
     }
 
     @Test
-    public void givenDifferentValuesInInchToCompare_ShouldReturnFalse() throws QuantityMeasurementException {
-        Inch inchValue1 = new Inch(4.0);
-        Inch inchValue2 = new Inch(6.0);
+    public void givenDifferentValuesInInch_WhenCompared_ShouldReturnFalse() throws QuantityMeasurementException {
+        Length inchValue1 = new Length(4.0, Length.LengthType.INCH);
+        Length inchValue2 = new Length(6.0, Length.LengthType.INCH);
         Assert.assertFalse(inchValue1.equals(inchValue2));
     }
 
     @Test
-    public void givenYardValueNull_ShouldThrowAnException() {
+    public void givenYardValue_WhenNull_ShouldThrowAnException() {
         try {
-            new Yard(null);
+            new Length(null, Length.LengthType.YARD);
         } catch (QuantityMeasurementException e) {
             Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
         }
     }
 
     @Test
-    public void given1YardAnd3FeetToCompare_ShouldReturnTrue() throws QuantityMeasurementException {
-        Feet feet = new Feet(3.0);
-        Yard yard = new Yard(1.0);
-       Assert.assertEquals(new QuantityMeasurement()
-                        .doConversion(feet.value, ConversionType.FEET_TO_YARD), yard.value , 0.0001);
+    public void given1YardAnd3Feet_WhenCompared_ShouldReturnTrue() throws QuantityMeasurementException {
+        Length feet = new Length(3.0, Length.LengthType.FEET);
+        Length yard = new Length(1.0, Length.LengthType.YARD);
+       Assert.assertEquals(quantityMeasurement.convertToCommonBase(feet.value, feet.lengthType),
+                           quantityMeasurement.convertToCommonBase(yard.value , yard.lengthType),
+                           0.0001);
     }
 
     @Test
-    public void given1YardAnd1FeetToCompare_ShouldReturnFalse() throws QuantityMeasurementException {
-        Feet feet = new Feet(1.0);
-        Yard yard = new Yard(1.0);
-        Assert.assertNotEquals(new QuantityMeasurement()
-                            .doConversion(yard.value, ConversionType.FEET_TO_YARD), feet.value , 0.0001);
+    public void given1YardAnd1Feet_WhenCompared_ShouldReturnFalse() throws QuantityMeasurementException {
+        Length feet = new Length(1.0, Length.LengthType.FEET);
+        Length yard = new Length(1.0, Length.LengthType.YARD);
+        Assert.assertNotEquals(quantityMeasurement.convertToCommonBase(yard.value, Length.LengthType.YARD),
+                                quantityMeasurement.convertToCommonBase(feet.value , feet.lengthType),
+                                0.0001);
     }
 
     @Test
-    public void given1InchAnd1YardToCompare_ShouldReturnFalse() throws QuantityMeasurementException {
-        Inch inch = new Inch(1.0);
-        Yard yard = new Yard(1.0);
-        Assert.assertNotEquals(new QuantityMeasurement()
-                            .doConversion(inch.value , ConversionType.INCH_TO_YARD), yard.value, 0.0001);
+    public void given1InchAnd1Yard_WhenCompared_ShouldReturnFalse() throws QuantityMeasurementException {
+        Length inch = new Length(1.0, Length.LengthType.INCH);
+        Length yard = new Length(1.0, Length.LengthType.YARD);
+        Assert.assertNotEquals(quantityMeasurement.convertToCommonBase(inch.value , inch.lengthType),
+                                quantityMeasurement.convertToCommonBase(yard.value, yard.lengthType),
+                                0.0001);
     }
 
     @Test
-    public void given1YardAnd36InchToCompare_ShouldReturnTrue() throws QuantityMeasurementException {
-        Inch inch = new Inch(36.0);
-        Yard yard = new Yard(1.0);
-        Assert.assertEquals(new QuantityMeasurement()
-                .doConversion(yard.value , ConversionType.YARD_TO_INCH), inch.value , 0.0001);
+    public void given1YardAnd36Inch_WhenCompared_ShouldReturnTrue() throws QuantityMeasurementException {
+        Length inch = new Length(36.0, Length.LengthType.INCH);
+        Length yard = new Length(1.0, Length.LengthType.YARD);
+        Assert.assertEquals(quantityMeasurement.convertToCommonBase(yard.value , yard.lengthType),
+                            quantityMeasurement.convertToCommonBase(inch.value , inch.lengthType),
+                            0.0001);
     }
 
     @Test
-    public void given36InchANd1YardToCompare_ShouldReturnTrue() throws QuantityMeasurementException {
-        Inch inch = new Inch(36.0);
-        Yard yard = new Yard(1.0);
-        Assert.assertEquals(new QuantityMeasurement()
-                .doConversion(inch.value , ConversionType.INCH_TO_YARD), yard.value , 0.0001);
+    public void given36InchANd1Yard_WhenCompared_ShouldReturnTrue() throws QuantityMeasurementException {
+        Length inch = new Length(36.0, Length.LengthType.INCH);
+        Length yard = new Length(1.0, Length.LengthType.YARD);
+        Assert.assertEquals(quantityMeasurement.convertToCommonBase(yard.value , yard.lengthType),
+                            quantityMeasurement.convertToCommonBase(inch.value, inch.lengthType),
+                            0.0001);
     }
 
     @Test
-    public void given1YdAnd3FeetToCompare_ShouldReturnTrue() throws QuantityMeasurementException {
-        Yard yard = new Yard(1.0);
-        Feet feet = new Feet(3.0);
-        Assert.assertEquals(new QuantityMeasurement()
-                .doConversion(yard.value , ConversionType.YARD_TO_FEET), feet.value , 0.0001);
+    public void given1YdAnd3Feet_WhenCompared_ShouldReturnTrue() throws QuantityMeasurementException {
+        Length yard = new Length(1.0, Length.LengthType.YARD);
+        Length feet = new Length(3.0, Length.LengthType.FEET);
+        Assert.assertEquals(quantityMeasurement.convertToCommonBase(yard.value , yard.lengthType),
+                            quantityMeasurement.convertToCommonBase(feet.value , feet.lengthType),
+                            0.0001);
     }
 
     @Test
-    public void given2InchesAnd5CentimeterTCompare_ShouldReturnTrue() {
-        Inch inch = new Inch(2.0);
-        Centimeter centimeter = new Centimeter(5.0);
-        Assert.assertEquals(new QuantityMeasurement()
-                .doConversion(inch.value , ConversionType.INCH_TO_CM), centimeter.value , 0.0001);
+    public void given2InchesAnd5Centimeter_WhenCompared_ShouldReturnTrue() {
+        Length inch = new Length(2.0, Length.LengthType.INCH);
+        Length centimeter = new Length(5.0, Length.LengthType.CM);
+        Assert.assertEquals(quantityMeasurement.convertToCommonBase(centimeter.value , centimeter.lengthType),
+                            quantityMeasurement.convertToCommonBase(inch.value , inch.lengthType),
+                            0.0001);
     }
 
     @Test
-    public void given2InchesAnd10CentimeterToCompare_ShouldReturnFalse() {
-        Inch inch = new Inch(2.0);
-        Centimeter centimeter = new Centimeter(10.0);
-        Assert.assertNotEquals(new QuantityMeasurement()
-                .doConversion(inch.value , ConversionType.INCH_TO_CM), centimeter.value , 0.0001);
+    public void given2InchesAnd10Centimeter_WhenCompared_ShouldReturnFalse() {
+        Length inch = new Length(2.0, Length.LengthType.INCH);
+        Length centimeter = new Length(10.0, Length.LengthType.CM);
+        Assert.assertNotEquals(quantityMeasurement.convertToCommonBase(centimeter.value , centimeter.lengthType),
+                               quantityMeasurement.convertToCommonBase(inch.value , inch.lengthType),
+                               0.0001);
     }
 
     @Test
-    public void givenNullInputInCentimeter_ShouldThrowAnException() {
+    public void givenNullInputInCentimeter_WhenChecked_ShouldThrowAnException() {
         try {
-            new Centimeter(null);
+            new Length(null, Length.LengthType.CM);
         } catch (QuantityMeasurementException e) {
             Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
         }
