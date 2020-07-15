@@ -107,7 +107,7 @@ public class QuantityMeasurementTest {
     }
 
     @Test
-    public void given1YardAnd3Feet_ShouldReturnTrue() throws QuantityMeasurementException {
+    public void given1YardAnd3FeetToCompare_ShouldReturnTrue() throws QuantityMeasurementException {
         Feet feet = new Feet(3.0);
         Yard yard = new Yard(1.0);
        Assert.assertEquals(new QuantityMeasurement()
@@ -115,7 +115,7 @@ public class QuantityMeasurementTest {
     }
 
     @Test
-    public void given1YardAnd1Feet_ShouldReturnFalse() throws QuantityMeasurementException {
+    public void given1YardAnd1FeetToCompare_ShouldReturnFalse() throws QuantityMeasurementException {
         Feet feet = new Feet(1.0);
         Yard yard = new Yard(1.0);
         Assert.assertNotEquals(new QuantityMeasurement()
@@ -123,7 +123,7 @@ public class QuantityMeasurementTest {
     }
 
     @Test
-    public void given1InchAnd1Yard_ShouldReturnFalse() throws QuantityMeasurementException {
+    public void given1InchAnd1YardToCompare_ShouldReturnFalse() throws QuantityMeasurementException {
         Inch inch = new Inch(1.0);
         Yard yard = new Yard(1.0);
         Assert.assertNotEquals(new QuantityMeasurement()
@@ -131,7 +131,7 @@ public class QuantityMeasurementTest {
     }
 
     @Test
-    public void given1YardAnd36Inch_ShouldReturnTrue() throws QuantityMeasurementException {
+    public void given1YardAnd36InchToCompare_ShouldReturnTrue() throws QuantityMeasurementException {
         Inch inch = new Inch(36.0);
         Yard yard = new Yard(1.0);
         Assert.assertEquals(new QuantityMeasurement()
@@ -139,7 +139,7 @@ public class QuantityMeasurementTest {
     }
 
     @Test
-    public void given36InchANd1Yard_ShouldReturnTrue() throws QuantityMeasurementException {
+    public void given36InchANd1YardToCompare_ShouldReturnTrue() throws QuantityMeasurementException {
         Inch inch = new Inch(36.0);
         Yard yard = new Yard(1.0);
         Assert.assertEquals(new QuantityMeasurement()
@@ -147,7 +147,7 @@ public class QuantityMeasurementTest {
     }
 
     @Test
-    public void given1YdAnd3Feet_ShouldReturnTrue() throws QuantityMeasurementException {
+    public void given1YdAnd3FeetToCompare_ShouldReturnTrue() throws QuantityMeasurementException {
         Yard yard = new Yard(1.0);
         Feet feet = new Feet(3.0);
         Assert.assertEquals(new QuantityMeasurement()
@@ -155,10 +155,27 @@ public class QuantityMeasurementTest {
     }
 
     @Test
-    public void given2InchesAnd5Centimeter_ShouldReturnTrue() {
+    public void given2InchesAnd5CentimeterTCompare_ShouldReturnTrue() {
         Inch inch = new Inch(2.0);
         Centimeter centimeter = new Centimeter(5.0);
         Assert.assertEquals(new QuantityMeasurement()
                 .doConversion(inch.value , ConversionType.INCH_TO_CM), centimeter.value , 0.0001);
+    }
+
+    @Test
+    public void given2InchesAnd10CentimeterToCompare_ShouldReturnFalse() {
+        Inch inch = new Inch(2.0);
+        Centimeter centimeter = new Centimeter(10.0);
+        Assert.assertNotEquals(new QuantityMeasurement()
+                .doConversion(inch.value , ConversionType.INCH_TO_CM), centimeter.value , 0.0001);
+    }
+
+    @Test
+    public void givenNullInputInCentimeter_ShouldThrowAnException() {
+        try {
+            new Centimeter(null);
+        } catch (QuantityMeasurementException e) {
+            Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
+        }
     }
 }
