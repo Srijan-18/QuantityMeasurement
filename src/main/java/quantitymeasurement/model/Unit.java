@@ -12,11 +12,13 @@ public class Unit {
         CM(1.0/2.5, UnitCategory.LENGTH),
         GALLON(3.78, UnitCategory.VOLUME),
         LITRE(1.0, UnitCategory.VOLUME),
-        MILLILITRE(0.001, UnitCategory.VOLUME);
-
+        MILLILITRE(0.001, UnitCategory.VOLUME),
+        GRAM(0.001, UnitCategory.WEIGHT),
+        KILOGRAM(1.0, UnitCategory.WEIGHT),
+        TONNE(1000, UnitCategory.WEIGHT);
 
         public enum UnitCategory {
-            LENGTH, VOLUME
+            LENGTH, VOLUME, WEIGHT
         }
 
        public double conversionToBaseFactor;
