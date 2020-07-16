@@ -12,7 +12,9 @@ public class QuantityMeasurement {
      * @return
      */
     public double convertToCommonBase(double value, Unit.UnitType unitType) {
-        return value* unitType.conversionToBaseFactor;
+        if(unitType.equals(Unit.UnitType.CELSIUS))
+            return value * unitType.conversionToBaseFactor + 32;
+        return value * unitType.conversionToBaseFactor;
     }
 
     public boolean compare(Unit unit1, Unit unit2) {

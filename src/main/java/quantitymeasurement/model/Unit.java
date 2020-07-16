@@ -15,10 +15,12 @@ public class Unit {
         MILLILITRE(0.001, UnitCategory.VOLUME),
         GRAM(0.001, UnitCategory.WEIGHT),
         KILOGRAM(1.0, UnitCategory.WEIGHT),
-        TONNE(1000, UnitCategory.WEIGHT);
+        TONNE(1000, UnitCategory.WEIGHT),
+        CELSIUS(1.8, UnitCategory.TEMPERATURE),
+        FAHRENHEIT(1, UnitCategory.TEMPERATURE);
 
         public enum UnitCategory {
-            LENGTH, VOLUME, WEIGHT
+            LENGTH, VOLUME, WEIGHT, TEMPERATURE;
         }
 
        public double conversionToBaseFactor;
