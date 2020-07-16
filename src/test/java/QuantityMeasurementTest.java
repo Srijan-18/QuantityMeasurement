@@ -226,4 +226,13 @@ public class QuantityMeasurementTest {
         Unit litre = new Unit(1.0, Unit.UnitType.LITRE);
         Assert.assertEquals(1.010, quantityMeasurement.addValues(litre, millilitre), 0.00);
     }
+
+    @Test
+    public void givenLitreValue_WhenNull_ShouldThrowCustomException() {
+        try {
+            new Unit(null, Unit.UnitType.LITRE);
+        } catch (QuantityMeasurementException e) {
+            Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
+        }
+    }
 }
