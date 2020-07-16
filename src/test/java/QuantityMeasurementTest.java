@@ -219,4 +219,11 @@ public class QuantityMeasurementTest {
         Unit litre = new Unit(3.78, Unit.UnitType.LITRE);
         Assert.assertEquals(7.56, quantityMeasurement.addValues(litre, gallon), 0.00);
     }
+
+    @Test
+    public void givenValuesInMillilitresAndLitres_WhenAdded_ShouldReturnResultInLitres() {
+        Unit millilitre = new Unit(10.0, Unit.UnitType.MILLILITRE);
+        Unit litre = new Unit(1.0, Unit.UnitType.LITRE);
+        Assert.assertEquals(1.010, quantityMeasurement.addValues(litre, millilitre), 0.00);
+    }
 }
