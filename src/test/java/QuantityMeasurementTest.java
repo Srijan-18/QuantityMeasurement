@@ -242,4 +242,11 @@ public class QuantityMeasurementTest {
         Unit kilogram = new Unit(1.0, Unit.UnitType.KILOGRAM);
         Assert.assertTrue(quantityMeasurement.compare(grams, kilogram));
     }
+
+    @Test
+    public void givenValuesInTonnesAndKilogramsToCompare_WhenCorrect_ShouldReturnTrue() {
+        Unit tonne = new Unit(1.0, Unit.UnitType.TONNE);
+        Unit kilogram = new Unit(1000.0, Unit.UnitType.KILOGRAM);
+        Assert.assertTrue(quantityMeasurement.compare(tonne, kilogram));
+    }
 }
