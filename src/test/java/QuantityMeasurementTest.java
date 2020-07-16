@@ -256,4 +256,11 @@ public class QuantityMeasurementTest {
         Unit kilogram = new Unit(1250.0, Unit.UnitType.KILOGRAM);
         Assert.assertEquals(2250.0, quantityMeasurement.addValues(tonne, kilogram), 0.0);
     }
+
+    @Test
+    public void givenValueInCelsiusAndFahrenheitToCompare_WhenCorrect_ShouldReturnTrue() {
+        Unit celsius = new Unit(100.0, Unit.UnitType.CELSIUS);
+        Unit fahrenheit = new Unit(212.0, Unit.UnitType.FAHRENHEIT);
+        Assert.assertTrue(quantityMeasurement.compare(fahrenheit, celsius));
+    }
 }
