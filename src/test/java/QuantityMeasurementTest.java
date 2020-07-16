@@ -263,4 +263,15 @@ public class QuantityMeasurementTest {
         Unit fahrenheit = new Unit(212.0, Unit.UnitType.FAHRENHEIT);
         Assert.assertTrue(quantityMeasurement.compare(fahrenheit, celsius));
     }
+
+    @Test
+    public void givenValuesToAdd_WhenUnitCategoriesMismatch_ShouldThrowAnException() {
+        Unit litre = new Unit(1.0, Unit.UnitType.LITRE);
+        Unit kilogram = new Unit(1250.0, Unit.UnitType.KILOGRAM);
+        try {
+            quantityMeasurement.addValues(litre, kilogram);
+        } catch (QuantityMeasurementException e) {
+            Assert.assertEquals(QuantityMeasurementException.ExceptionType.DIFFERENT_CATEGORIES, e.type);
+        }
+    }
 }
