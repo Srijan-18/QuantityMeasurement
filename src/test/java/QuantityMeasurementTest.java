@@ -184,4 +184,11 @@ public class QuantityMeasurementTest {
         double result = quantityMeasurement.addValues(inch, centimeter);
         Assert.assertEquals(result, 3.0, 0.0001);
     }
+
+    @Test
+    public void givenValuesGallonAndLitreToCompare_WhenCorrect_ShouldReturnTrue() {
+        Unit gallon = new Unit(1.0, Unit.UnitType.GALLON);
+        Unit litre = new Unit(3.78, Unit.UnitType.LITRE);
+        Assert.assertTrue(quantityMeasurement.compare(gallon, litre));
+    }
 }
