@@ -205,4 +205,11 @@ public class QuantityMeasurementTest {
         Unit litre = new Unit(1.0, Unit.UnitType.LITRE);
         Assert.assertTrue(quantityMeasurement.compare(millilitre, litre));
     }
+
+    @Test
+    public void givenValuesInMillilitreAndLitreToCompare_WhenInCorrect_ShouldReturnTrue() {
+        Unit millilitre = new Unit(10.0, Unit.UnitType.MILLILITRE);
+        Unit litre = new Unit(1.0, Unit.UnitType.LITRE);
+        Assert.assertFalse(quantityMeasurement.compare(millilitre, litre));
+    }
 }
