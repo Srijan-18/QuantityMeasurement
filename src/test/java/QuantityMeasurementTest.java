@@ -191,4 +191,11 @@ public class QuantityMeasurementTest {
         Unit litre = new Unit(3.78, Unit.UnitType.LITRE);
         Assert.assertTrue(quantityMeasurement.compare(gallon, litre));
     }
+
+    @Test
+    public void givenValuesGallonAndLitreToCompare_WhenInCorrect_ShouldReturnTrue() {
+        Unit gallon = new Unit(1.0, Unit.UnitType.GALLON);
+        Unit litre = new Unit(1.0, Unit.UnitType.LITRE);
+        Assert.assertFalse(quantityMeasurement.compare(gallon, litre));
+    }
 }
