@@ -5,7 +5,9 @@ import quantitymeasurement.exception.QuantityMeasurementException;
 public class Unit {
 
     public enum UnitType {
-
+        /**
+         * UNIT TYPE enums that contain information of unit category and relation with base unit.
+         */
         INCH(1.0, UnitCategory.LENGTH),
         FEET(12.0, UnitCategory.LENGTH),
         YARD(36.0, UnitCategory.LENGTH),
@@ -19,12 +21,21 @@ public class Unit {
         CELSIUS(1.8, UnitCategory.TEMPERATURE),
         FAHRENHEIT(1, UnitCategory.TEMPERATURE);
 
+        /**
+         * Enum to store Unit category,used to facilitate conversion and addition of same categories only.
+         */
         public enum UnitCategory {
             LENGTH, VOLUME, WEIGHT, TEMPERATURE;
         }
 
        public double conversionToBaseFactor;
        public UnitCategory unitCategory;
+
+        /**
+         * Constructor of enum to initialize conversionToBaseFactor adn UnitCategory through specific enum constants.
+         * @param conversionToBaseFactor
+         * @param unitCategory
+         */
         UnitType(double conversionToBaseFactor, UnitCategory unitCategory) {
             this.conversionToBaseFactor = conversionToBaseFactor;
             this.unitCategory = unitCategory;
@@ -35,7 +46,7 @@ public class Unit {
     public double value;
 
     /**
-     *
+     * Constructor to initialize class variables.
      * @param value
      * @param unitType
      * @throws QuantityMeasurementException
@@ -51,10 +62,10 @@ public class Unit {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Unit)) return false;
-        Unit unit = (Unit) o;
+    public boolean equals(Object that) {
+        if (this == that) return true;
+        if (!(that instanceof Unit)) return false;
+        Unit unit = (Unit) that;
         return Double.compare(unit.value, value) == 0 &&
                 unitType == unit.unitType;
     }
