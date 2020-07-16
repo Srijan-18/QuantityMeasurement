@@ -2,7 +2,7 @@ package quantitymeasurement.exception;
 
 public class QuantityMeasurementException extends RuntimeException {
     public enum ExceptionType {
-         NULL_VALUE
+        DIFFERENT_CATEGORIES, NULL_VALUE
     }
     public ExceptionType type;
 
