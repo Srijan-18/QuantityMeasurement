@@ -192,4 +192,13 @@ public class QuantityMeasurementTest {
         double result = quantityMeasurement.addValues(feet1, feet2);
         Assert.assertEquals(result, 24.0, 0.0001);
     }
+
+    @Test
+    public void givenValuesInInchesAndCentimeter_WhenAdded_ShouldReturnResultInInches() {
+        Length inch = new Length(2.0 , Length.LengthType.INCH);
+        Length centimeter = new Length(2.5, Length.LengthType.CM);
+        double result = quantityMeasurement.addValues(inch, centimeter);
+        Assert.assertEquals(result, 3.0, 0.0001);
+
+    }
 }
