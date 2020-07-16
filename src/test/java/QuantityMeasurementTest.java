@@ -286,4 +286,15 @@ public class QuantityMeasurementTest {
             Assert.assertEquals(QuantityMeasurementException.ExceptionType.DIFFERENT_CATEGORIES, e.type);
         }
     }
+
+    @Test
+    public void givenValuesToCompare_WhenNegative_ShouldThrowAnException() {
+        Unit litre = new Unit(-1.0, Unit.UnitType.LITRE);
+        Unit kilogram = new Unit(1250.0, Unit.UnitType.KILOGRAM);
+        try {
+            quantityMeasurement.compare(litre, kilogram);
+        } catch (QuantityMeasurementException e) {
+            Assert.assertEquals(QuantityMeasurementException.ExceptionType.NEGATIVE_VALUE, e.type);
+        }
+    }
 }
