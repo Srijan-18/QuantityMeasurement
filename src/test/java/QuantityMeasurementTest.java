@@ -235,4 +235,11 @@ public class QuantityMeasurementTest {
             Assert.assertEquals(QuantityMeasurementException.ExceptionType.NULL_VALUE, e.type);
         }
     }
+
+    @Test
+    public void givenValuesInGramAndKiloGramToCompare_WhenCorrect_ShouldReturnTrue() {
+        Unit grams = new Unit(1000.0, Unit.UnitType.GRAM);
+        Unit kilogram = new Unit(1.0, Unit.UnitType.KILOGRAM);
+        Assert.assertTrue(quantityMeasurement.compare(grams, kilogram));
+    }
 }
