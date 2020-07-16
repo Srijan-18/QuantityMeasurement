@@ -1,17 +1,10 @@
 package quantitymeasurement.service;
 
+import quantitymeasurement.enums.UnitType;
 import quantitymeasurement.exception.QuantityMeasurementException;
 import quantitymeasurement.model.Unit;
-import quantitymeasurement.utility.UnitConversionAndAddition;
-
 
 public class QuantityMeasurement {
-
-    private UnitConversionAndAddition unitConversionAndAddition;
-
-    public QuantityMeasurement() {
-        unitConversionAndAddition = new UnitConversionAndAddition();
-    }
 
     /**
      * TASK : To convert one type to A common base.
@@ -19,8 +12,10 @@ public class QuantityMeasurement {
      * @param unitType
      * @return
      */
-    public double convertToCommonBase(double value, Unit.UnitType unitType) {
-        return unitConversionAndAddition.convertToCommonBase(value, unitType);
+    public double convertToCommonBase(double value, UnitType unitType) {
+        if(unitType.equals(UnitType.CELSIUS))
+            return value * unitType.conversionToBaseFactor + 32;
+        return value * unitType.conversionToBaseFactor;
     }
 
     /**
@@ -30,9 +25,13 @@ public class QuantityMeasurement {
      * @return result in common base unit.
      */
     public double addValues(Unit unit1, Unit unit2) {
-        checkNegative(unit1);
-        checkNegative(unit2);
-        return unitConversionAndAddition.addValues(unit1,unit2);
+        this.checkNegative(unit1);
+        this.checkNegative(unit2);
+        if(unit1.unitType.unitCategory.equals(unit2.unitType.unitCategory))
+            return convertToCommonBase(unit1.value, unit1.unitType)
+                    + convertToCommonBase(unit2.value, unit2.unitType) ;
+        throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.DIFFERENT_CATEGORIES,
+                                                "DIFFERENT UNIT CATEGORIES");
     }
 
     /**
@@ -42,8 +41,8 @@ public class QuantityMeasurement {
      * @return result of comparison in boolean format
      */
     public boolean compare(Unit unit1, Unit unit2) {
-        checkNegative(unit1);
-        checkNegative(unit2);
+        this.checkNegative(unit1);
+        this.checkNegative(unit2);
         if (unit1.unitType.unitCategory.equals(unit2.unitType.unitCategory))
             return compareConvertedValues(convertToCommonBase(unit1.value, unit1.unitType),
                                           convertToCommonBase(unit2.value, unit2.unitType));
@@ -69,9 +68,7 @@ public class QuantityMeasurement {
      * @return result of comparison.
      */
     private boolean compareConvertedValues(double value1, double value2) {
-     final double requiredPrecision = 0.0001;
-     return Math.abs(value1 - value2) <= requiredPrecision;
+         final double requiredPrecision = 0.0001;
+         return Math.abs(value1 - value2) <= requiredPrecision;
     }
-
-
 }
