@@ -30,6 +30,8 @@ public class QuantityMeasurement {
      * @return result in common base unit.
      */
     public double addValues(Unit unit1, Unit unit2) {
+        checkNegative(unit1);
+        checkNegative(unit2);
         return unitConversionAndAddition.addValues(unit1,unit2);
     }
 
@@ -40,6 +42,8 @@ public class QuantityMeasurement {
      * @return result of comparison in boolean format
      */
     public boolean compare(Unit unit1, Unit unit2) {
+        checkNegative(unit1);
+        checkNegative(unit2);
         if (unit1.unitType.unitCategory.equals(unit2.unitType.unitCategory))
             return compareConvertedValues(convertToCommonBase(unit1.value, unit1.unitType),
                                           convertToCommonBase(unit2.value, unit2.unitType));
@@ -48,7 +52,18 @@ public class QuantityMeasurement {
     }
 
     /**
-     * TASK: To Compare Values with precision of upto fourth decimal place.
+     * TASK: To Check for Negative value.
+     * @param unit
+     */
+
+    private void checkNegative(Unit unit) {
+        if(unit.value< 0.0 )
+            throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.NEGATIVE_VALUE,
+                                                    "Negative Value");
+    }
+
+    /**
+     * TASK: To Compare Values with precision of up to fourth decimal place.
      * @param value1
      * @param value2
      * @return result of comparison.
@@ -57,4 +72,6 @@ public class QuantityMeasurement {
      final double requiredPrecision = 0.0001;
      return Math.abs(value1 - value2) <= requiredPrecision;
     }
+
+
 }
