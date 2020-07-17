@@ -1,10 +1,10 @@
 package quantitymeasurement.enums;
 
+/**
+ * UNIT TYPE enum that contains information of unit category and relation with base unit.
+ */
 public enum UnitType {
 
-    /**
-     * UNIT TYPE enums that contain information of unit category and relation with base unit.
-     */
     INCH(1.0, UnitCategory.LENGTH),
     FEET(12.0, UnitCategory.LENGTH),
     YARD(36.0, UnitCategory.LENGTH),

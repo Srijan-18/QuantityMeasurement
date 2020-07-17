@@ -2,10 +2,10 @@ package quantitymeasurement.service;
 
 import quantitymeasurement.enums.UnitCategory;
 import quantitymeasurement.enums.UnitType;
-import quantitymeasurement.exception.QuantityMeasurementException;
+import quantitymeasurement.exception.QuantityMeasurementOperationsException;
 import quantitymeasurement.model.Unit;
 
-public class QuantityMeasurement {
+public class QuantityMeasurementOperations {
 
     /**
      * TASK : To convert one type to a common base.
@@ -14,8 +14,9 @@ public class QuantityMeasurement {
      * @return
      */
     public double convertToCommonBase(double value, UnitType unitType) {
+        final double TEMPERATURE_ADDITION_FACTOR = 32.0;
         if(unitType.equals(UnitType.CELSIUS))
-            return value * unitType.conversionToBaseFactor + 32;
+            return value * unitType.conversionToBaseFactor + TEMPERATURE_ADDITION_FACTOR;
         return value * unitType.conversionToBaseFactor;
     }
 
@@ -27,16 +28,16 @@ public class QuantityMeasurement {
      */
     public double addValues(Unit unit1, Unit unit2) {
         if(unit1.value < 0.0 || unit2.value < 0.0 )
-            throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.NEGATIVE_VALUE,
+            throw new QuantityMeasurementOperationsException(QuantityMeasurementOperationsException.ExceptionType.NEGATIVE_VALUE,
                                                    "Negative Value");
         if(unit1.unitType.unitCategory.equals(UnitCategory.TEMPERATURE) &&
                 unit2.unitType.unitCategory.equals(UnitCategory.TEMPERATURE))
-            throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.TEMPERATURE_ADDITION,
+            throw new QuantityMeasurementOperationsException(QuantityMeasurementOperationsException.ExceptionType.TEMPERATURE_ADDITION,
                                                    "TEMPERATURES CAN NOT BE ADDED");
         if(unit1.unitType.unitCategory.equals(unit2.unitType.unitCategory))
             return convertToCommonBase(unit1.value, unit1.unitType)
                     + convertToCommonBase(unit2.value, unit2.unitType) ;
-        throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.DIFFERENT_CATEGORIES,
+        throw new QuantityMeasurementOperationsException(QuantityMeasurementOperationsException.ExceptionType.DIFFERENT_CATEGORIES,
                                                "DIFFERENT UNIT CATEGORIES");
     }
 
@@ -48,12 +49,12 @@ public class QuantityMeasurement {
      */
     public boolean compare(Unit unit1, Unit unit2) {
         if(unit1.value < 0.0 || unit2.value < 0.0 )
-            throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.NEGATIVE_VALUE,
+            throw new QuantityMeasurementOperationsException(QuantityMeasurementOperationsException.ExceptionType.NEGATIVE_VALUE,
                                                    "Negative Value");
         if (unit1.unitType.unitCategory.equals(unit2.unitType.unitCategory))
             return compareConvertedValues(convertToCommonBase(unit1.value, unit1.unitType),
                                           convertToCommonBase(unit2.value, unit2.unitType));
-        throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.DIFFERENT_CATEGORIES,
+        throw new QuantityMeasurementOperationsException(QuantityMeasurementOperationsException.ExceptionType.DIFFERENT_CATEGORIES,
                                                "DIFFERENT UNIT CATEGORIES");
     }
 
