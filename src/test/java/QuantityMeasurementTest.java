@@ -298,4 +298,15 @@ public class QuantityMeasurementTest {
             Assert.assertEquals(QuantityMeasurementException.ExceptionType.NEGATIVE_VALUE, e.type);
         }
     }
+
+    @Test
+    public void givenBothTemperatureValues_WhenAdded_ShouldThrowAnException() {
+        Unit celsius = new Unit(100.0, UnitType.CELSIUS);
+        Unit fahrenheit = new Unit(100.0, UnitType.FAHRENHEIT);
+        try {
+            quantityMeasurement.addValues(celsius, fahrenheit);
+        } catch (QuantityMeasurementException e) {
+            Assert.assertEquals(QuantityMeasurementException.ExceptionType.TEMPERATURE_ADDITION, e.type);
+        }
+    }
 }
