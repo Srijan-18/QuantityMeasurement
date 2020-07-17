@@ -1,5 +1,6 @@
 package quantitymeasurement.service;
 
+import quantitymeasurement.enums.UnitCategory;
 import quantitymeasurement.enums.UnitType;
 import quantitymeasurement.exception.QuantityMeasurementException;
 import quantitymeasurement.model.Unit;
@@ -28,6 +29,10 @@ public class QuantityMeasurement {
         if(unit1.value < 0.0 || unit2.value < 0.0 )
             throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.NEGATIVE_VALUE,
                                                    "Negative Value");
+        if(unit1.unitType.unitCategory.equals(UnitCategory.TEMPERATURE) &&
+                unit2.unitType.unitCategory.equals(UnitCategory.TEMPERATURE))
+            throw new QuantityMeasurementException(QuantityMeasurementException.ExceptionType.TEMPERATURE_ADDITION,
+                                                   "TEMPERATURES CAN NOT BE ADDED");
         if(unit1.unitType.unitCategory.equals(unit2.unitType.unitCategory))
             return convertToCommonBase(unit1.value, unit1.unitType)
                     + convertToCommonBase(unit2.value, unit2.unitType) ;

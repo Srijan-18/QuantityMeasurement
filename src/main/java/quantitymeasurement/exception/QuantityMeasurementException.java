@@ -3,7 +3,7 @@ package quantitymeasurement.exception;
 public class QuantityMeasurementException extends RuntimeException {
 
     public enum ExceptionType {
-        DIFFERENT_CATEGORIES, NEGATIVE_VALUE, NULL_VALUE
+        DIFFERENT_CATEGORIES, NEGATIVE_VALUE, TEMPERATURE_ADDITION, NULL_VALUE
     }
     public ExceptionType type;
 
